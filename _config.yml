@@ -1,0 +1,6 @@
+title: Bioinformatics Pipeline
+theme: just-the-docs
+
+# Dark mode setting
+just_the_docs:
+  color_scheme: dark
