@@ -1,40 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bioinformatics Project</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioinformatics Pipeline Guide</title>
+    <link rel="stylesheet" href="bioinformatics_style.css">
 </head>
 <body>
-  <header>
-    <h1>🧬 Bioinformatics Project</h1>
-    <p>Welcome to my GitHub Pages site!</p>
-  </header>
+    <div class="container">
+        <header>
+            <h1>🧬 Bioinformatics Pipeline Guide</h1>
+            <p>From raw sequencing data to variant calling - A comprehensive workflow</p>
+        </header>
 
-  <main>
-    <section>
-      <h2>🔍 About This Project</h2>
-      <p>This project showcases various bioinformatics workflows and research, including molecular docking, sequence alignment, and target identification using tools like PyRx and Discovery Studio.</p>
-    </section>
+        <!-- One-Command Installation Section -->
+        <div class="section">
+            <h2><span class="emoji">⚡</span> One-Command Installation</h2>
+            
+            <div class="note">
+                Run either of these commands to automatically install all required tools and dependencies:
+            </div>
+            
+            <h3>Using curl</h3>
+            <div class="command one-liner"><code>curl -s https://raw.githubusercontent.com/SHAHRIARJAHIN/bioinformatics/31105cd971a8f65f9c66c8a9e42e5efa693e6e87/bioinformatics_pipeline_setup.sh | sudo bash</code></div>
+            
+            <h3>Using wget</h3>
+            <div class="command one-liner"><code>wget -qO- https://raw.githubusercontent.com/SHAHRIARJAHIN/bioinformatics/31105cd971a8f65f9c66c8a9e42e5efa693e6e87/bioinformatics_pipeline_setup.sh | sudo bash</code></div>
+            
+            <div class="warning">
+                <strong>Note:</strong> These commands will:
+                <ul>
+                    <li>Install all dependencies system-wide (requires sudo)</li>
+                    <li>Create conda environments for each tool</li>
+                    <li>Download reference databases</li>
+                    <li>Set up the complete bioinformatics pipeline</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- System Setup Section -->
+        <div class="section">
+            <h2><span class="emoji">🔧</span> 1. System Setup</h2>
+            
+            <h3><span class="emoji">🖥️</span> Enable WSL (Windows Subsystem for Linux)</h3>
+            <div class="command"><code>wsl --install</code></div>
+            <div class="note">Restart your computer after installation.</div>
+            
+            <h3><span class="emoji">🛠️</span> Troubleshooting WSL</h3>
+            <p>Ensure the following Windows features are enabled:</p>
+            <ul>
+                <li>✅ Virtual Machine Platform</li>
+                <li>✅ Windows Hypervisor Platform</li>
+                <li>✅ Windows PowerShell 2.0</li>
+                <li>✅ Windows Subsystem for Linux</li>
+                <li>✅ Work Folders Client</li>
+            </ul>
+        </div>
+        
+        <!-- Miniconda Installation Section -->
+        <div class="section">
+            <h2><span class="emoji">📦</span> 2. Install Miniconda</h2>
+            
+            <h3>Download and Install</h3>
+            <div class="command"><code>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh</code></div>
+            <p>Follow the prompts (mostly pressing <span class="inline-code">Enter</span> and typing <span class="inline-code">yes</span>).</p>
+            
+            <h3>Conda Environment Commands</h3>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">conda create -n myenv</span></td>
+                    <td>Create a new environment</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">conda activate myenv</span></td>
+                    <td>Activate environment</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">conda deactivate</span></td>
+                    <td>Deactivate current environment</td>
+                </tr>
+                <tr>
+                    <td><span class="inline-code">conda remove --name myenv --all</span></td>
+                    <td>Delete an environment</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- SRA Data Section -->
+        <div class="section">
+            <h2><span class="emoji">📥</span> 3. Download SRA Data</h2>
+            
+            <h3>Install SRA Toolkit</h3>
+            <div class="command"><code>conda create -n sra-tools
+conda activate sra-tools
+conda install bioconda::sra-tools</code></div>
+            
+            <h3>Commands to Fetch and Convert Data</h3>
+            <div class="command"><code>prefetch SRR_ID                      # Download SRA data
+fastq-dump --split-files SRR_ID      # Convert to FASTQ format</code></div>
+        </div>
+        
+        <!-- Quality Control Section -->
+        <div class="section">
+            <h2><span class="emoji">✅</span> 4. Quality Control with FastQC</h2>
+            
+            <h3>Install FastQC</h3>
+            <div class="command"><code>conda create --name fastqc_env
+conda activate fastqc_env
+conda config --add channels bioconda
+conda install fastqc</code></div>
+            
+            <h3>FastQC Commands</h3>
+            <div class="command"><code>fastqc your_file.fastq
+fastqc file_1.fastq file_2.fastq
+fastqc *.fastq                      # Run QC on all FASTQ files</code></div>
+        </div>
+        
+        <!-- Read Trimming Section -->
+        <div class="section">
+            <h2><span class="emoji">✂️</span> 5. Read Trimming</h2>
+            
+            <h3>Option A: Trimmomatic</h3>
+            <div class="command"><code>conda create --name trimmomatic_env
+conda activate trimmomatic_env
+conda install -c bioconda trimmomatic</code></div>
+            
+            <h4>Single-end</h4>
+            <div class="command"><code>trimmomatic SE input.fastq output_trimmed.fastq LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36</code></div>
+            
+            <h4>Paired-end</h4>
+            <div class="command"><code>trimmomatic PE input_1.fastq input_2.fastq output_1_paired.fastq output_1_unpaired.fastq output_2_paired.fastq output_2_unpaired.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36</code></div>
+            
+            <h3>Option B: FastP (with HTML/JSON reports)</h3>
+            <div class="command"><code>conda create --name fastp_env
+conda activate fastp_env
+conda install -c bioconda fastp</code></div>
+            
+            <h4>Single-end</h4>
+            <div class="command"><code>fastp -i input.fastq -o output.fastq -h report.html -j report.json</code></div>
+            
+            <h4>Paired-end</h4>
+            <div class="command"><code>fastp -i input_1.fastq -I input_2.fastq -o output_1.fastq -O output_2.fastq -h fastp_report.html -j fastp_report.json</code></div>
+        </div>
+        
+        <!-- Read Mapping & Variant Calling Section -->
+        <div class="section">
+            <h2><span class="emoji">🧬</span> 6. Read Mapping & Variant Calling</h2>
+            
+            <h3>Tools Setup</h3>
+            <div class="command"><code>conda create --name mapping_vcf
+conda activate mapping_vcf
+sudo apt-get update && sudo apt-get install -y bwa samtools bcftools</code></div>
+            
+            <h3>Mapping Workflow</h3>
+            <div class="command"><code>bwa index reference.fasta                          # Index reference genome
+samtools faidx reference.fasta                     # Create FASTA index
+bwa mem reference.fasta R1.fastq R2.fastq > aligned_reads.sam
+samtools view -S -b aligned_reads.sam > aligned_reads.bam
+samtools sort aligned_reads.bam -o aligned_reads_sorted.bam
+samtools index aligned_reads_sorted.bam
+samtools flagstat aligned_reads_sorted.bam > mapping_report.txt</code></div>
+            
+            <h3>Variant Calling with FreeBayes</h3>
+            <div class="command"><code>conda create -n freebayes_env python=3.9 -y
+conda activate freebayes_env
+conda install -c bioconda freebayes
 
-    <section>
-      <h2>📁 Resources</h2>
-      <ul>
-        <li><a href="notebooks/target-analysis.html">Target Analysis</a></li>
-        <li><a href="notebooks/docking-results.html">Docking Results</a></li>
-        <li><a href="assets/report.pdf">Full Report (PDF)</a></li>
-      </ul>
-    </section>
+freebayes -f reference.fasta aligned_reads_sorted.bam > variants.vcf</code></div>
+            
+            <h3>VCF Processing with BCFTools</h3>
+            <div class="command"><code>conda create -n bcftools_env
+conda activate bcftools_env
+conda install -c bioconda bcftools htslib
 
-    <section>
-      <h2>📫 Contact</h2>
-      <p>If you'd like to get in touch, reach out via <a href="mailto:you@example.com">email</a>.</p>
-    </section>
-  </main>
+bgzip variants.vcf
+bcftools index variants.vcf.gz
+bcftools filter -i 'QUAL>30' variants.vcf.gz -o high_quality.vcf
+bcftools stats variants.vcf.gz > stats.txt</code></div>
+            
+            <h3>Variant Annotation with SnpEff</h3>
+            <div class="command"><code>conda create --name snpeff_env
+conda activate snpeff_env
+conda install -c bioconda snpeff
 
-  <footer>
-    <p>&copy; 2025 Your Name. Built with ❤️ using GitHub Pages.</p>
-  </footer>
+snpeff GRCh37.75 variants.vcf > annotated_variants.vcf</code></div>
+        </div>
+        
+        <!-- Visualization Section -->
+        <div class="section">
+            <h2><span class="emoji">🔬</span> 7. Visualization using IGV</h2>
+            <div class="command"><code>conda create -n igv_env python=3.9 -y
+conda activate igv_env
+conda install -c bioconda igv
+
+igv     # Launch IGV GUI</code></div>
+            <p>Use the GUI to load your reference genome and BAM file to visually inspect aligned reads and called variants.</p>
+        </div>
+        
+        <!-- Final Notes Section -->
+        <div class="section">
+            <h2><span class="emoji">🧾</span> Final Notes</h2>
+            <ul>
+                <li>📁 Organize outputs into directories like <span class="inline-code">raw_data/</span>, <span class="inline-code">trimmed/</span>, <span class="inline-code">aligned/</span>, <span class="inline-code">variants/</span>, etc.</li>
+                <li>🧪 Always verify file integrity and check logs for errors.</li>
+                <li>🔁 Use <span class="inline-code">conda list</span> to view installed packages within an environment.</li>
+                <li>📤 Export environments using:
+                    <div class="command"><code>conda env export > env_name.yml</code></div>
+                </li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>Bioinformatics Pipeline Guide | Last updated: 2023</p>
+        </footer>
+    </div>
 </body>
 </html>
