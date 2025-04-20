@@ -1,0 +1,60 @@
+/* Dark mode friendly design */
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --link-color: #80cbc4;
+  --accent-color: #bb86fc;
+  --header-color: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+header {
+  background-color: #1f1f1f;
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+header h1 {
+  margin: 0;
+  color: var(--header-color);
+  font-size: 2.5rem;
+}
+
+main {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: var(--accent-color);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #1a1a1a;
+  border-top: 1px solid var(--accent-color);
+  font-size: 0.9rem;
+}
