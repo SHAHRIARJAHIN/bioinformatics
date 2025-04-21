@@ -5,72 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bioinformatics Pipeline Guide</title>
     <link rel="stylesheet" href="bioinformatics_style.css">
+    <!-- Adding Tailwind CSS for modern styling -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Adding a copy button functionality for code blocks -->
+    
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🧬 Bioinformatics Pipeline Guide</h1>
-            <p>From raw sequencing data to variant calling - A comprehensive workflow</p>
+        <!-- Adding a dark mode toggle button -->
+        <header class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-4xl font-bold">🧬 Bioinformatics Pipeline Guide</h1>
+                    <p class="text-lg">From raw sequencing data to variant calling - A comprehensive workflow</p>
+                </div>
+                <button id="darkModeToggle" class="bg-gray-800 text-white px-4 py-2 rounded">Toggle Dark Mode</button>
+            </div>
         </header>
 
         <!-- One-Command Installation Section -->
-       <div class="section"><h1><span class="emoji">🔧</span>One-Command Installation Section</h1> <section>
-    <h2>🔗 1. Download the Script</h2>
-    <p>Use <code>wget</code> to download the script from GitHub:</p>
-    <pre><code>wget https://raw.githubusercontent.com/SHAHRIARJAHIN/bioinformatics/2b6426aae0cd38562566f3d9f1cee7c4a1082cba/bioinformatics_pipeline_setup.sh</code></pre>
-  </section>
+        <div class="container mx-auto p-6">
+            <div class="section transition-transform transform hover:scale-105">
+                <h1 class="text-2xl font-semibold mb-4"><span class="emoji">🔧</span> One-Command Installation Section</h1>
+                <section class="mb-6">
+                    <h2 class="text-xl font-medium">🔗 1. Download the Script</h2>
+                    <p>Use <code>wget</code> to download the script from GitHub:</p>
+                    <div class="code-container">
+                        <code>wget https://raw.githubusercontent.com/SHAHRIARJAHIN/bioinformatics/2b6426aae0cd38562566f3d9f1cee7c4a1082cba/bioinformatics_pipeline_setup.sh</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
 
-  <section>
-    <h2>🛠️ 2. Make it Executable</h2>
-    <pre><code>chmod +x bioinformatics_pipeline_setup.sh</code></pre>
-  </section>
+                <section class="mb-6">
+                    <h2 class="text-xl font-medium">🛠️ 2. Make it Executable</h2>
+                    <div class="code-container">
+                        <code>chmod +x bioinformatics_pipeline_setup.sh</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
 
-  <section>
-    <h2>▶️ 3. Run the Script</h2>
-    <pre><code>./bioinformatics_pipeline_setup.sh</code></pre>
-  </section>
+                <section class="mb-6">
+                    <h2 class="text-xl font-medium">▶️ 3. Run the Script</h2>
+                    <div class="code-container">
+                        <code>./bioinformatics_pipeline_setup.sh</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
 
-  <section>
-    <h2>📦 4. What the Script Installs</h2>
-    <p>The script sets up <strong>Miniconda</strong> and installs the following tools in separate environments:</p>
-    <ul>
-      <li><code>sra-tools</code></li>
-      <li><code>fastqc</code></li>
-      <li><code>trimmomatic</code></li>
-      <li><code>fastp</code></li>
-      <li><code>bwa, samtools, bcftools</code></li>
-      <li><code>freebayes</code></li>
-      <li><code>snpeff</code></li>
-      <li><code>igv</code></li>
-    </ul>
-  </section>
+                <section class="mb-6">
+                    <h2 class="text-xl font-medium">📦 4. What the Script Installs</h2>
+                    <p>The script sets up <strong>Miniconda</strong> and installs the following tools in separate environments:</p>
+                    <ul class="list-disc pl-6">
+                        <li><code>sra-tools</code></li>
+                        <li><code>fastqc</code></li>
+                        <li><code>trimmomatic</code></li>
+                        <li><code>fastp</code></li>
+                        <li><code>bwa, samtools, bcftools</code></li>
+                        <li><code>freebayes</code></li>
+                        <li><code>snpeff</code></li>
+                        <li><code>igv</code></li>
+                    </ul>
+                </section>
 
-  <section>
-    <h2>📂 5. After Installation</h2>
-    <p>Reload your terminal configuration:</p>
-    <pre><code>source ~/.bashrc</code></pre>
-    <p>Then activate a tool environment and run it:</p>
-    <pre><code>conda activate fastqc_env
-fastqc --help</code></pre>
-  </section>
+                <section class="mb-6">
+                    <h2 class="text-xl font-medium">📂 5. After Installation</h2>
+                    <p>Reload your terminal configuration:</p>
+                    <div class="code-container">
+                        <code>source ~/.bashrc</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <p>Then activate a tool environment and run it:</p>
+                    <div class="code-container">
+                        <code>conda activate fastqc_env</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <div class="code-container">
+                        <code>fastqc --help</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
 
-  <section>
-    <h2>🚨 6. If Conda Not Found</h2>
-    <p>If <code>conda</code> still shows as not found, run:</p>
-    <pre><code>export PATH="$HOME/miniconda3/bin:$PATH"
-source ~/miniconda3/etc/profile.d/conda.sh</code></pre>
-    <p>Then test again:</p>
-    <pre><code>conda --version</code></pre>
-  </section>
+                <section class="mb-6">
+                    <h2 class="text-xl font-medium">🚨 6. If Conda Not Found</h2>
+                    <p>If <code>conda</code> still shows as not found, run:</p>
+                    <div class="code-container">
+                        <code>export PATH="$HOME/miniconda3/bin:$PATH"</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <div class="code-container">
+                        <code>source ~/miniconda3/etc/profile.d/conda.sh</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                    <p>Then test again:</p>
+                    <div class="code-container">
+                        <code>conda --version</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
+                </section>
+            </div>
+        </div>
 
-    </div>
         <!-- System Setup Section -->
         <h1><span class="emoji">🔧</span>Manual Installation Section step by step</h1>
         <div class="section">
             <h2><span class="emoji">🔧</span> 1. System Setup</h2>
             
             <h3><span class="emoji">🖥️</span> Enable WSL (Windows Subsystem for Linux)</h3>
-            <div class="command"><code>wsl --install</code></div>
+            <div class="code-container">
+                <code>wsl --install</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             <div class="note">Restart your computer after installation.</div>
             
             <h3><span class="emoji">🛠️</span> Troubleshooting WSL</h3>
@@ -89,8 +133,11 @@ source ~/miniconda3/etc/profile.d/conda.sh</code></pre>
             <h2><span class="emoji">📦</span> 2. Install Miniconda</h2>
             
             <h3>Download and Install</h3>
-            <div class="command"><code>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh</code></div>
+            <div class="code-container">
+                <code>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             <p>Follow the prompts (mostly pressing <span class="inline-code">Enter</span> and typing <span class="inline-code">yes</span>).</p>
             
             <h3>Conda Environment Commands</h3>
@@ -123,13 +170,19 @@ bash Miniconda3-latest-Linux-x86_64.sh</code></div>
             <h2><span class="emoji">📥</span> 3. Download SRA Data</h2>
             
             <h3>Install SRA Toolkit</h3>
-            <div class="command"><code>conda create -n sra-tools <br>
+            <div class="code-container">
+                <code>conda create -n sra-tools <br>
 conda activate sra-tools <br>
-conda install bioconda::sra-tools</code></div>
+conda install bioconda::sra-tools</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h3>Commands to Fetch and Convert Data</h3>
-            <div class="command"><code>prefetch SRR_ID                      # Download SRA data<br>
-fastq-dump --split-files SRR_ID      # Convert to FASTQ format</code></div>
+            <div class="code-container">
+                <code>prefetch SRR_ID                      # Download SRA data<br>
+fastq-dump --split-files SRR_ID      # Convert to FASTQ format</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
         </div>
         
         <!-- Quality Control Section -->
@@ -137,15 +190,21 @@ fastq-dump --split-files SRR_ID      # Convert to FASTQ format</code></div>
             <h2><span class="emoji">✅</span> 4. Quality Control with FastQC</h2>
             
             <h3>Install FastQC</h3>
-            <div class="command"><code>conda create --name fastqc_env<br>
+            <div class="code-container">
+                <code>conda create --name fastqc_env<br>
 conda activate fastqc_env<br>
 conda config --add channels bioconda<br>
-conda install fastqc</code></div>
+conda install fastqc</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h3>FastQC Commands</h3>
-            <div class="command"><code>fastqc your_file.fastq # Run QC on single FASTQ files <br>
+            <div class="code-container">
+                <code>fastqc your_file.fastq # Run QC on single FASTQ files <br>
 fastqc file_1.fastq file_2.fastq
-fastqc *.fastq                      # Run QC on all FASTQ files</code></div>
+fastqc *.fastq                      # Run QC on all FASTQ files</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
         </div>
         
         <!-- Read Trimming Section -->
@@ -153,26 +212,44 @@ fastqc *.fastq                      # Run QC on all FASTQ files</code></div>
             <h2><span class="emoji">✂️</span> 5. Read Trimming</h2>
             
             <h3>Option A: Trimmomatic</h3>
-            <div class="command"><code>conda create --name trimmomatic_env<br>
+            <div class="code-container">
+                <code>conda create --name trimmomatic_env<br>
 conda activate trimmomatic_env<br>
-conda install -c bioconda trimmomatic</code></div>
+conda install -c bioconda trimmomatic</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h4>Single-end</h4>
-            <div class="command"><code>trimmomatic SE input.fastq output_trimmed.fastq LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36</code></div>
+            <div class="code-container">
+                <code>trimmomatic SE input.fastq output_trimmed.fastq LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h4>Paired-end</h4>
-            <div class="command"><code>trimmomatic PE input_1.fastq input_2.fastq output_1_paired.fastq output_1_unpaired.fastq output_2_paired.fastq output_2_unpaired.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36</code></div>
+            <div class="code-container">
+                <code>trimmomatic PE input_1.fastq input_2.fastq output_1_paired.fastq output_1_unpaired.fastq output_2_paired.fastq output_2_unpaired.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h3>Option B: FastP (with HTML/JSON reports)</h3>
-            <div class="command"><code>conda create --name fastp_env<br>
+            <div class="code-container">
+                <code>conda create --name fastp_env<br>
 conda activate fastp_env<br>
-conda install -c bioconda fastp</code></div>
+conda install -c bioconda fastp</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h4>Single-end</h4>
-            <div class="command"><code>fastp -i input.fastq -o output.fastq -h report.html -j report.json</code></div>
+            <div class="code-container">
+                <code>fastp -i input.fastq -o output.fastq -h report.html -j report.json</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h4>Paired-end</h4>
-            <div class="command"><code>fastp -i input_1.fastq -I input_2.fastq -o output_1.fastq -O output_2.fastq -h fastp_report.html -j fastp_report.json</code></div>
+            <div class="code-container">
+                <code>fastp -i input_1.fastq -I input_2.fastq -o output_1.fastq -O output_2.fastq -h fastp_report.html -j fastp_report.json</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
         </div>
         
         <!-- Read Mapping & Variant Calling Section -->
@@ -180,75 +257,110 @@ conda install -c bioconda fastp</code></div>
             <h2><span class="emoji">🧬</span> 6. Read Mapping & Variant Calling</h2>
             
             <h3>Tools Setup</h3>
-            <div class="command"><code>conda create --name mapping_vcf<br>
+            <div class="code-container">
+                <code>conda create --name mapping_vcf<br>
 conda activate mapping_vcf<br>
-sudo apt-get update && sudo apt-get install -y bwa samtools bcftools</code></div>
+sudo apt-get update && sudo apt-get install -y bwa samtools bcftools</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h3>Mapping Workflow</h3>
-            <div class="command"><code>bwa index reference.fasta   <br>                       # Index reference genome
+            <div class="code-container">
+                <code>bwa index reference.fasta   <br>                       # Index reference genome
 samtools faidx reference.fasta                     # Create FASTA index<br>
 bwa mem reference.fasta R1.fastq R2.fastq > aligned_reads.sam<br>
 samtools view -S -b aligned_reads.sam > aligned_reads.bam<br>
 samtools sort aligned_reads.bam -o aligned_reads_sorted.bam<br>
 samtools index aligned_reads_sorted.bam<br>
-samtools flagstat aligned_reads_sorted.bam > mapping_report.txt</code></div>
+samtools flagstat aligned_reads_sorted.bam > mapping_report.txt</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h3>Variant Calling with FreeBayes</h3>
-            <div class="command"><code>conda create -n freebayes_env python=3.9 -y
+            <div class="code-container">
+                <code>conda create -n freebayes_env python=3.9 -y
                 <br>conda activate freebayes_env
                 <br>conda install -c bioconda freebayes
 
-freebayes -f reference.fasta aligned_reads_sorted.bam > variants.vcf</code></div>
+freebayes -f reference.fasta aligned_reads_sorted.bam > variants.vcf</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h3>VCF Processing with BCFTools</h3>
-            <div class="command"><code>conda create -n bcftools_env<br>
+            <div class="code-container">
+                <code>conda create -n bcftools_env<br>
 conda activate bcftools_env<br>
 conda install -c bioconda bcftools htslib<br>
 
 bgzip variants.vcf<br>
 bcftools index variants.vcf.gz<br>
 bcftools filter -i 'QUAL>30' variants.vcf.gz -o high_quality.vcf<br>
-bcftools stats variants.vcf.gz > stats.txt</code></div>
+bcftools stats variants.vcf.gz > stats.txt</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             
             <h3>Variant Annotation with SnpEff</h3>
-            <div class="command"><code>conda create --name snpeff_env<br>
+            <div class="code-container">
+                <code>conda create --name snpeff_env<br>
 conda activate snpeff_env<br>
 conda install -c bioconda snpeff<br>
 
-snpeff GRCh37.75 variants.vcf > annotated_variants.vcf</code></div>
+snpeff GRCh37.75 variants.vcf > annotated_variants.vcf</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
         </div>
         
         <!-- Visualization Section -->
         <div class="section">
             <h2><span class="emoji">🔬</span> 7. Visualization using IGV</h2>
-            <div class="command"><code>conda create -n igv_env python=3.9 -y<br>
+            <div class="code-container">
+                <code>conda create -n igv_env python=3.9 -y<br>
 conda activate igv_env<br>
 conda install -c bioconda igv<br>
 
-igv     # Launch IGV GUI</code></div>
+igv     # Launch IGV GUI</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             <p>Use the GUI to load your reference genome and BAM file to visually inspect aligned reads and called variants.</p>
         </div>
         <div class="section">
             <h2><span class="emoji">🧩</span> 8. Genome Assembly</h2>
             
             <h3>SPAdes Assembly</h3>
-            <div class="command"><code>conda create -n spades_env python=3.8 -y<br>
+            <div class="code-container">
+                <code>conda create -n spades_env python=3.8 -y<br>
 conda activate spades_env<br>
 conda install -c bioconda spades<br></code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
 
-<h4>Paired-end</h4>
-<div class="command"><code>spades.py -1 R1.fastq -2 R2.fastq -o spades_output</code></div>
+            <h4>Paired-end</h4>
+            <div class="code-container"></div>
+                <code>spades.py -1 R1.fastq -2 R2.fastq -o spades_output</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
 
-<h4>Single-End</h4>
-div class="command"><code>spades.py -s reads.fastq -o spades_output </code></div>
+            <h4>Single-End</h4>
+            <div class="code-container">
+                <code>spades.py -s reads.fastq -o spades_output </code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
 
-<h4>Hybrid (Illumina + Nanopore)</h4>
-<div class="command"><code>spades.py -1 reads_1.fastq -2 reads_2.fastq --nanopore nanopore_reads.fastq -o output_dir</code></div>
+            <h4>Hybrid (Illumina + Nanopore)</h4>
+            <div class="code-container">
+                <code>spades.py -1 reads_1.fastq -2 reads_2.fastq --nanopore nanopore_reads.fastq -o output_dir</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
 
-<h4>With more resources</h4><div class="command"><code>spades.py -1 reads_1.fastq -2 reads_2.fastq -o spades_output --threads 8 --memory 16</code></div>
+            <h4>With more resources</h4>
+            <div class="code-container">
+                <code>spades.py -1 reads_1.fastq -2 reads_2.fastq -o spades_output --threads 8 --memory 16</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
 
             <h3>QUAST Quality Assessment</h3>
-            <div class="command"><code>conda create -n quast_ev<br>
+            <div class="code-container">
+                <code>conda create -n quast_ev<br>
 conda activate quast_ev<br>
 conda install -c bioconda quast<br>
 
@@ -259,7 +371,9 @@ quast contigs.fasta -o quast_output<br>
 quast assembly1.fasta assembly2.fasta -o quast_output<br>
 
 # With reference<br>
-quast contigs.fasta -o quast_output --threads 8 --reference reference_genome.fasta</code></div>
+quast contigs.fasta -o quast_output --threads 8 --reference reference_genome.fasta</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
         </div>
 
         <!-- NEW: Genome Annotation Section -->
@@ -267,7 +381,8 @@ quast contigs.fasta -o quast_output --threads 8 --reference reference_genome.fas
             <h2><span class="emoji">🏷️</span> 9. Genome Annotation</h2>
             
             <h3>Prokka Annotation</h3>
-            <div class="command"><code>conda create -n prokka_env<br>
+            <div class="code-container">
+                <code>conda create -n prokka_env<br>
 conda activate prokka_env<br>
 conda install -c bioconda prokka<br>
 
@@ -275,12 +390,17 @@ conda install -c bioconda prokka<br>
 prokka --outdir annotation_output --prefix genome contigs.fasta<br>
 
 # Customized<br>
-prokka --kingdom Bacteria --outdir annotation_output --prefix genome --cpus 8 contigs.fasta</code></div>
+prokka --kingdom Bacteria --outdir annotation_output --prefix genome --cpus 8 contigs.fasta</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
 
             <h3>Artemis Visualization</h3>
-            <div class="command"><code>conda create -n artemis_env -c bioconda artemis -y<br>
+            <div class="code-container">
+                <code>conda create -n artemis_env -c bioconda artemis -y<br>
 conda activate artemis_env<br>
-art  # Launches GUI</code></div>
+art  # Launches GUI</code>
+                <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+            </div>
             <p>In Artemis: File > Open > Select your .gff, .gbk, or .fasta files</p>
         </div>
 
@@ -355,7 +475,10 @@ art  # Launches GUI</code></div>
                 <li>🧪 Always verify file integrity and check logs for errors.</li>
                 <li>🔁 Use <span class="inline-code">conda list</span> to view installed packages within an environment.</li>
                 <li>📤 Export environments using:
-                    <div class="command"><code>conda env export > env_name.yml</code></div>
+                    <div class="code-container">
+                        <code>conda env export > env_name.yml</code>
+                        <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -364,5 +487,29 @@ art  # Launches GUI</code></div>
             <p>Bioinformatics Pipeline Guide | Last updated: 2025</p>
         </footer>
     </div>
+
+    <script>
+        // Dark mode toggle functionality
+        const toggleButton = document.getElementById('darkModeToggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            document.body.classList.toggle('bg-gray-900');
+            document.body.classList.toggle('text-white');
+        });
+
+        // Copy button functionality
+        function copyToClipboard(button) {
+            const codeBlock = button.previousElementSibling;
+            const text = codeBlock.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = "Copied!";
+                setTimeout(() => {
+                    button.textContent = "Copy";
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        }
+    </script>
 </body>
 </html>
