@@ -20,7 +20,6 @@ command_exists() {
 # 1. System Setup
 print_header "1. SYSTEM SETUP"
 
-# Check for Linux system
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "Linux system detected"
 elif [[ "$OSTYPE" == "msys"* ]]; then
@@ -34,101 +33,112 @@ fi
 # 2. Miniconda Installation
 print_header "2. MINICONDA INSTALLATION"
 
-if ! command_exists conda; then
-    echo "Conda not found. Installing Miniconda..."
+CONDA_DIR="$HOME/miniconda3"
 
-    # Download and install Miniconda
+if ! command_exists conda; then
+    echo "Installing Miniconda..."
     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    bash miniconda.sh -b -p $HOME/miniconda3
+    bash miniconda.sh -b -p "$CONDA_DIR"
     rm miniconda.sh
 
-    # Initialize conda and reload shell
-    $HOME/miniconda3/bin/conda init
+    # Initialize conda
+    export PATH="$CONDA_DIR/bin:$PATH"
+    source "$CONDA_DIR/etc/profile.d/conda.sh"
+    conda init bash
     source ~/.bashrc
-
-    # Check again
-    if ! command_exists conda; then
-        echo "Conda installation failed. Please check manually."
-        exit 1
-    fi
-
     echo "Miniconda installed successfully"
 else
-    echo "Conda is already installed"
+    echo "Miniconda is already installed or conda already available"
 fi
 
-# 3. SRA Toolkit Setup
-print_header "3. SRA TOOLKIT SETUP"
+# 3. Tool Installations
+print_header "3. CREATING ENVIRONMENTS & INSTALLING TOOLS"
 
+# SRA Toolkit
 conda create -n sra-tools -y
 conda activate sra-tools
 conda install -c bioconda sra-tools -y
 conda deactivate
-echo "SRA Toolkit installed in 'sra-tools' environment"
-
-# 4. Quality Control Tools
-print_header "4. QUALITY CONTROL TOOLS"
 
 # FastQC
 conda create -n fastqc_env -y
 conda activate fastqc_env
 conda install -c bioconda fastqc -y
 conda deactivate
-echo "FastQC installed in 'fastqc_env' environment"
 
 # Trimmomatic
 conda create -n trimmomatic_env -y
 conda activate trimmomatic_env
 conda install -c bioconda trimmomatic -y
 conda deactivate
-echo "Trimmomatic installed in 'trimmomatic_env' environment"
 
 # FastP
 conda create -n fastp_env -y
 conda activate fastp_env
 conda install -c bioconda fastp -y
 conda deactivate
-echo "FastP installed in 'fastp_env' environment"
 
-# 5. Mapping and Variant Calling Tools
-print_header "5. MAPPING AND VARIANT CALLING TOOLS"
-
-# Mapping tools (BWA, samtools, bcftools)
+# Mapping tools: BWA, samtools, bcftools
 conda create -n mapping_vcf -y
 conda activate mapping_vcf
 conda install -c bioconda bwa samtools bcftools -y
 conda deactivate
-echo "Mapping tools installed in 'mapping_vcf' environment"
 
 # FreeBayes
 conda create -n freebayes_env -y
 conda activate freebayes_env
 conda install -c bioconda freebayes -y
 conda deactivate
-echo "FreeBayes installed in 'freebayes_env' environment"
 
 # BCFTools (separate env)
 conda create -n bcftools_env -y
 conda activate bcftools_env
 conda install -c bioconda bcftools htslib -y
 conda deactivate
-echo "BCFTools installed in 'bcftools_env' environment"
 
 # SnpEff
 conda create -n snpeff_env -y
 conda activate snpeff_env
 conda install -c bioconda snpeff -y
 conda deactivate
-echo "SnpEff installed in 'snpeff_env' environment"
 
 # IGV
 conda create -n igv_env python=3.9 -y
 conda activate igv_env
 conda install -c bioconda igv -y
 conda deactivate
-echo "IGV installed in 'igv_env' environment"
 
-# Completion Message
+# NEW: SPAdes (Genome Assembly)
+conda create -n spades_env python=3.8 -y
+conda activate spades_env
+conda install -c bioconda spades -y
+conda deactivate
+
+# NEW: QUAST (Assembly Quality Assessment)
+conda create -n quast_env -y
+conda activate quast_env
+conda install -c bioconda quast -y
+conda deactivate
+
+# NEW: Prokka (Genome Annotation)
+conda create -n prokka_env -y
+conda activate prokka_env
+conda install -c bioconda prokka -y
+conda deactivate
+
+# NEW: Artemis (Genome Visualization)
+conda create -n artemis_env -y
+conda activate artemis_env
+conda install -c bioconda artemis -y
+conda deactivate
+
+# NEW: Abricate (Antibiotic Resistance)
+conda create -n abricate_env -y
+conda activate abricate_env
+conda install -c bioconda abricate -y
+conda deactivate
+
+# Final message
 print_header "INSTALLATION COMPLETE"
 echo "All bioinformatics tools have been installed in their respective conda environments."
 echo ""
@@ -136,12 +146,20 @@ echo "To use any tool, activate its environment first:"
 echo "  conda activate [environment_name]"
 echo ""
 echo "Available environments:"
-echo "  - sra-tools"
-echo "  - fastqc_env"
-echo "  - trimmomatic_env"
-echo "  - fastp_env"
-echo "  - mapping_vcf"
-echo "  - freebayes_env"
-echo "  - bcftools_env"
-echo "  - snpeff_env"
-echo "  - igv_env"
+echo "  - sra-tools        # SRA Toolkit"
+echo "  - fastqc_env       # FastQC"
+echo "  - trimmomatic_env  # Trimmomatic"
+echo "  - fastp_env        # FastP"
+echo "  - mapping_vcf      # BWA, samtools, bcftools"
+echo "  - freebayes_env    # FreeBayes"
+echo "  - bcftools_env     # BCFTools"
+echo "  - snpeff_env       # SnpEff"
+echo "  - igv_env          # IGV"
+echo "  - spades_env       # SPAdes (NEW)"
+echo "  - quast_env        # QUAST (NEW)"
+echo "  - prokka_env       # Prokka (NEW)"
+echo "  - artemis_env      # Artemis (NEW)"
+echo "  - abricate_env     # Abricate (NEW)"
+echo ""
+echo "Note: For tools like ResFinder and SpeciesFinder, please visit:"
+echo "  - https://www.genomicepidemiology.org/"
