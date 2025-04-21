@@ -14,30 +14,56 @@
         </header>
 
         <!-- One-Command Installation Section -->
-        <div class="section">
-            <h2><span class="emoji">⚡</span> One-Command Installation</h2>
-            
-            <div class="note">
-                Run either of these commands to automatically install all required tools and dependencies:
-            </div>
-            
-            <h3>Using curl</h3>
-            <div class="command one-liner"><code>curl -s https://raw.githubusercontent.com/SHAHRIARJAHIN/bioinformatics/31105cd971a8f65f9c66c8a9e42e5efa693e6e87/bioinformatics_pipeline_setup.sh | sudo bash</code></div>
-            
-            <h3>Using wget</h3>
-            <div class="command one-liner"><code>wget -qO- https://raw.githubusercontent.com/SHAHRIARJAHIN/bioinformatics/31105cd971a8f65f9c66c8a9e42e5efa693e6e87/bioinformatics_pipeline_setup.sh | sudo bash</code></div>
-            
-            <div class="warning">
-                <strong>Note:</strong> These commands will:
-                <ul>
-                    <li>Install all dependencies system-wide (requires sudo)</li>
-                    <li>Create conda environments for each tool</li>
-                    <li>Download reference databases</li>
-                    <li>Set up the complete bioinformatics pipeline</li>
-                </ul>
-            </div>
-        </div>
-        
+       <div class="section"> <section>
+    <h2>🔗 1. Download the Script</h2>
+    <p>Use <code>wget</code> to download the script from GitHub:</p>
+    <pre><code>wget https://raw.githubusercontent.com/SHAHRIARJAHIN/bioinformatics/2b6426aae0cd38562566f3d9f1cee7c4a1082cba/bioinformatics_pipeline_setup.sh</code></pre>
+  </section>
+
+  <section>
+    <h2>🛠️ 2. Make it Executable</h2>
+    <pre><code>chmod +x bioinformatics_pipeline_setup.sh</code></pre>
+  </section>
+
+  <section>
+    <h2>▶️ 3. Run the Script</h2>
+    <pre><code>./bioinformatics_pipeline_setup.sh</code></pre>
+  </section>
+
+  <section>
+    <h2>📦 4. What the Script Installs</h2>
+    <p>The script sets up <strong>Miniconda</strong> and installs the following tools in separate environments:</p>
+    <ul>
+      <li><code>sra-tools</code></li>
+      <li><code>fastqc</code></li>
+      <li><code>trimmomatic</code></li>
+      <li><code>fastp</code></li>
+      <li><code>bwa, samtools, bcftools</code></li>
+      <li><code>freebayes</code></li>
+      <li><code>snpeff</code></li>
+      <li><code>igv</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📂 5. After Installation</h2>
+    <p>Reload your terminal configuration:</p>
+    <pre><code>source ~/.bashrc</code></pre>
+    <p>Then activate a tool environment and run it:</p>
+    <pre><code>conda activate fastqc_env
+fastqc --help</code></pre>
+  </section>
+
+  <section>
+    <h2>🚨 6. If Conda Not Found</h2>
+    <p>If <code>conda</code> still shows as not found, run:</p>
+    <pre><code>export PATH="$HOME/miniconda3/bin:$PATH"
+source ~/miniconda3/etc/profile.d/conda.sh</code></pre>
+    <p>Then test again:</p>
+    <pre><code>conda --version</code></pre>
+  </section>
+
+    </div>
         <!-- System Setup Section -->
         <div class="section">
             <h2><span class="emoji">🔧</span> 1. System Setup</h2>
