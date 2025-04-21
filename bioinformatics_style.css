@@ -141,3 +141,25 @@ footer {
     background-color: #1a1a1a;
     border-left: 4px solid var(--accent);
 }
+
+        .code-container {
+            position: relative;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .code-container:hover .copy-button {
+            opacity: 1;
+        }
