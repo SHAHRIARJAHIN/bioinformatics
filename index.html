@@ -96,12 +96,12 @@ bash Miniconda3-latest-Linux-x86_64.sh</code></div>
             <h2><span class="emoji">📥</span> 3. Download SRA Data</h2>
             
             <h3>Install SRA Toolkit</h3>
-            <div class="command"><code>conda create -n sra-tools
-conda activate sra-tools
+            <div class="command"><code>conda create -n sra-tools <br>
+conda activate sra-tools <br>
 conda install bioconda::sra-tools</code></div>
             
             <h3>Commands to Fetch and Convert Data</h3>
-            <div class="command"><code>prefetch SRR_ID                      # Download SRA data
+            <div class="command"><code>prefetch SRR_ID                      # Download SRA data<br>
 fastq-dump --split-files SRR_ID      # Convert to FASTQ format</code></div>
         </div>
         
@@ -110,13 +110,13 @@ fastq-dump --split-files SRR_ID      # Convert to FASTQ format</code></div>
             <h2><span class="emoji">✅</span> 4. Quality Control with FastQC</h2>
             
             <h3>Install FastQC</h3>
-            <div class="command"><code>conda create --name fastqc_env
-conda activate fastqc_env
-conda config --add channels bioconda
+            <div class="command"><code>conda create --name fastqc_env<br>
+conda activate fastqc_env<br>
+conda config --add channels bioconda<br>
 conda install fastqc</code></div>
             
             <h3>FastQC Commands</h3>
-            <div class="command"><code>fastqc your_file.fastq
+            <div class="command"><code>fastqc your_file.fastq # Run QC on single FASTQ files <br>
 fastqc file_1.fastq file_2.fastq
 fastqc *.fastq                      # Run QC on all FASTQ files</code></div>
         </div>
@@ -126,8 +126,8 @@ fastqc *.fastq                      # Run QC on all FASTQ files</code></div>
             <h2><span class="emoji">✂️</span> 5. Read Trimming</h2>
             
             <h3>Option A: Trimmomatic</h3>
-            <div class="command"><code>conda create --name trimmomatic_env
-conda activate trimmomatic_env
+            <div class="command"><code>conda create --name trimmomatic_env<br>
+conda activate trimmomatic_env<br>
 conda install -c bioconda trimmomatic</code></div>
             
             <h4>Single-end</h4>
@@ -137,8 +137,8 @@ conda install -c bioconda trimmomatic</code></div>
             <div class="command"><code>trimmomatic PE input_1.fastq input_2.fastq output_1_paired.fastq output_1_unpaired.fastq output_2_paired.fastq output_2_unpaired.fastq ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:TRUE LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36</code></div>
             
             <h3>Option B: FastP (with HTML/JSON reports)</h3>
-            <div class="command"><code>conda create --name fastp_env
-conda activate fastp_env
+            <div class="command"><code>conda create --name fastp_env<br>
+conda activate fastp_env<br>
 conda install -c bioconda fastp</code></div>
             
             <h4>Single-end</h4>
@@ -153,40 +153,40 @@ conda install -c bioconda fastp</code></div>
             <h2><span class="emoji">🧬</span> 6. Read Mapping & Variant Calling</h2>
             
             <h3>Tools Setup</h3>
-            <div class="command"><code>conda create --name mapping_vcf
-conda activate mapping_vcf
+            <div class="command"><code>conda create --name mapping_vcf<br>
+conda activate mapping_vcf<br>
 sudo apt-get update && sudo apt-get install -y bwa samtools bcftools</code></div>
             
             <h3>Mapping Workflow</h3>
-            <div class="command"><code>bwa index reference.fasta                          # Index reference genome
-samtools faidx reference.fasta                     # Create FASTA index
-bwa mem reference.fasta R1.fastq R2.fastq > aligned_reads.sam
-samtools view -S -b aligned_reads.sam > aligned_reads.bam
-samtools sort aligned_reads.bam -o aligned_reads_sorted.bam
-samtools index aligned_reads_sorted.bam
+            <div class="command"><code>bwa index reference.fasta   <br>                       # Index reference genome
+samtools faidx reference.fasta                     # Create FASTA index<br>
+bwa mem reference.fasta R1.fastq R2.fastq > aligned_reads.sam<br>
+samtools view -S -b aligned_reads.sam > aligned_reads.bam<br>
+samtools sort aligned_reads.bam -o aligned_reads_sorted.bam<br>
+samtools index aligned_reads_sorted.bam<br>
 samtools flagstat aligned_reads_sorted.bam > mapping_report.txt</code></div>
             
             <h3>Variant Calling with FreeBayes</h3>
             <div class="command"><code>conda create -n freebayes_env python=3.9 -y
-conda activate freebayes_env
-conda install -c bioconda freebayes
+                <br>conda activate freebayes_env
+                <br>conda install -c bioconda freebayes
 
 freebayes -f reference.fasta aligned_reads_sorted.bam > variants.vcf</code></div>
             
             <h3>VCF Processing with BCFTools</h3>
-            <div class="command"><code>conda create -n bcftools_env
-conda activate bcftools_env
-conda install -c bioconda bcftools htslib
+            <div class="command"><code>conda create -n bcftools_env<br>
+conda activate bcftools_env<br>
+conda install -c bioconda bcftools htslib<br>
 
-bgzip variants.vcf
-bcftools index variants.vcf.gz
-bcftools filter -i 'QUAL>30' variants.vcf.gz -o high_quality.vcf
+bgzip variants.vcf<br>
+bcftools index variants.vcf.gz<br>
+bcftools filter -i 'QUAL>30' variants.vcf.gz -o high_quality.vcf<br>
 bcftools stats variants.vcf.gz > stats.txt</code></div>
             
             <h3>Variant Annotation with SnpEff</h3>
-            <div class="command"><code>conda create --name snpeff_env
-conda activate snpeff_env
-conda install -c bioconda snpeff
+            <div class="command"><code>conda create --name snpeff_env<br>
+conda activate snpeff_env<br>
+conda install -c bioconda snpeff<br>
 
 snpeff GRCh37.75 variants.vcf > annotated_variants.vcf</code></div>
         </div>
@@ -194,9 +194,9 @@ snpeff GRCh37.75 variants.vcf > annotated_variants.vcf</code></div>
         <!-- Visualization Section -->
         <div class="section">
             <h2><span class="emoji">🔬</span> 7. Visualization using IGV</h2>
-            <div class="command"><code>conda create -n igv_env python=3.9 -y
-conda activate igv_env
-conda install -c bioconda igv
+            <div class="command"><code>conda create -n igv_env python=3.9 -y<br>
+conda activate igv_env<br>
+conda install -c bioconda igv<br>
 
 igv     # Launch IGV GUI</code></div>
             <p>Use the GUI to load your reference genome and BAM file to visually inspect aligned reads and called variants.</p>
@@ -205,34 +205,33 @@ igv     # Launch IGV GUI</code></div>
             <h2><span class="emoji">🧩</span> 8. Genome Assembly</h2>
             
             <h3>SPAdes Assembly</h3>
-            <div class="command"><code>conda create -n spades_env python=3.8 -y
-conda activate spades_env
-conda install -c bioconda spades
+            <div class="command"><code>conda create -n spades_env python=3.8 -y<br>
+conda activate spades_env<br>
+conda install -c bioconda spades<br></code>
 
-# Paired-End
-spades.py -1 R1.fastq -2 R2.fastq -o spades_output
+<h4>Paired-end</h4>
+<div class="command"><code>spades.py -1 R1.fastq -2 R2.fastq -o spades_output</code></div>
 
-# Single-End
-spades.py -s reads.fastq -o spades_output
+<h4>Single-End</h4>
+div class="command"><code>spades.py -s reads.fastq -o spades_output </code></div>
 
-# Hybrid (Illumina + Nanopore)
-spades.py -1 reads_1.fastq -2 reads_2.fastq --nanopore nanopore_reads.fastq -o output_dir
+<h4>Hybrid (Illumina + Nanopore)</h4>
+<div class="command"><code>spades.py -1 reads_1.fastq -2 reads_2.fastq --nanopore nanopore_reads.fastq -o output_dir</code></div>
 
-# With more resources
-spades.py -1 reads_1.fastq -2 reads_2.fastq -o spades_output --threads 8 --memory 16</code></div>
+<h4>With more resources</h4><div class="command"><code>spades.py -1 reads_1.fastq -2 reads_2.fastq -o spades_output --threads 8 --memory 16</code></div>
 
             <h3>QUAST Quality Assessment</h3>
-            <div class="command"><code>conda create -n quast_ev
-conda activate quast_ev
-conda install -c bioconda quast
+            <div class="command"><code>conda create -n quast_ev<br>
+conda activate quast_ev<br>
+conda install -c bioconda quast<br>
 
-# Basic
-quast contigs.fasta -o quast_output
+# Basic<br>
+quast contigs.fasta -o quast_output<br>
 
-# Comparative
-quast assembly1.fasta assembly2.fasta -o quast_output
+# Comparative<br>
+quast assembly1.fasta assembly2.fasta -o quast_output<br>
 
-# With reference
+# With reference<br>
 quast contigs.fasta -o quast_output --threads 8 --reference reference_genome.fasta</code></div>
         </div>
 
@@ -241,19 +240,19 @@ quast contigs.fasta -o quast_output --threads 8 --reference reference_genome.fas
             <h2><span class="emoji">🏷️</span> 9. Genome Annotation</h2>
             
             <h3>Prokka Annotation</h3>
-            <div class="command"><code>conda create -n prokka_env
-conda activate prokka_env
-conda install -c bioconda prokka
+            <div class="command"><code>conda create -n prokka_env<br>
+conda activate prokka_env<br>
+conda install -c bioconda prokka<br>
 
-# Basic annotation
-prokka --outdir annotation_output --prefix genome contigs.fasta
+# Basic annotation<br>
+prokka --outdir annotation_output --prefix genome contigs.fasta<br>
 
-# Customized
+# Customized<br>
 prokka --kingdom Bacteria --outdir annotation_output --prefix genome --cpus 8 contigs.fasta</code></div>
 
             <h3>Artemis Visualization</h3>
-            <div class="command"><code>conda create -n artemis_env -c bioconda artemis -y
-conda activate artemis_env
+            <div class="command"><code>conda create -n artemis_env -c bioconda artemis -y<br>
+conda activate artemis_env<br>
 art  # Launches GUI</code></div>
             <p>In Artemis: File > Open > Select your .gff, .gbk, or .fasta files</p>
         </div>
@@ -335,7 +334,7 @@ art  # Launches GUI</code></div>
         </div>
         
         <footer>
-            <p>Bioinformatics Pipeline Guide | Last updated: 2023</p>
+            <p>Bioinformatics Pipeline Guide | Last updated: 2025</p>
         </footer>
     </div>
 </body>
