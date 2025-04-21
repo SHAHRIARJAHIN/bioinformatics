@@ -201,6 +201,125 @@ conda install -c bioconda igv
 igv     # Launch IGV GUI</code></div>
             <p>Use the GUI to load your reference genome and BAM file to visually inspect aligned reads and called variants.</p>
         </div>
+        <div class="section">
+            <h2><span class="emoji">🧩</span> 8. Genome Assembly</h2>
+            
+            <h3>SPAdes Assembly</h3>
+            <div class="command"><code>conda create -n spades_env python=3.8 -y
+conda activate spades_env
+conda install -c bioconda spades
+
+# Paired-End
+spades.py -1 R1.fastq -2 R2.fastq -o spades_output
+
+# Single-End
+spades.py -s reads.fastq -o spades_output
+
+# Hybrid (Illumina + Nanopore)
+spades.py -1 reads_1.fastq -2 reads_2.fastq --nanopore nanopore_reads.fastq -o output_dir
+
+# With more resources
+spades.py -1 reads_1.fastq -2 reads_2.fastq -o spades_output --threads 8 --memory 16</code></div>
+
+            <h3>QUAST Quality Assessment</h3>
+            <div class="command"><code>conda create -n quast_ev
+conda activate quast_ev
+conda install -c bioconda quast
+
+# Basic
+quast contigs.fasta -o quast_output
+
+# Comparative
+quast assembly1.fasta assembly2.fasta -o quast_output
+
+# With reference
+quast contigs.fasta -o quast_output --threads 8 --reference reference_genome.fasta</code></div>
+        </div>
+
+        <!-- NEW: Genome Annotation Section -->
+        <div class="section">
+            <h2><span class="emoji">🏷️</span> 9. Genome Annotation</h2>
+            
+            <h3>Prokka Annotation</h3>
+            <div class="command"><code>conda create -n prokka_env
+conda activate prokka_env
+conda install -c bioconda prokka
+
+# Basic annotation
+prokka --outdir annotation_output --prefix genome contigs.fasta
+
+# Customized
+prokka --kingdom Bacteria --outdir annotation_output --prefix genome --cpus 8 contigs.fasta</code></div>
+
+            <h3>Artemis Visualization</h3>
+            <div class="command"><code>conda create -n artemis_env -c bioconda artemis -y
+conda activate artemis_env
+art  # Launches GUI</code></div>
+            <p>In Artemis: File > Open > Select your .gff, .gbk, or .fasta files</p>
+        </div>
+
+        <!-- NEW: Analysis Section -->
+        <div class="section">
+            <h2><span class="emoji">🔍</span> 10. Advanced Analysis</h2>
+            
+            <h3>CGE Tools (Genomic Epidemiology)</h3>
+            <ul>
+                <li><a href="http://genepi.food.dtu.dk/resfinder" target="_blank">ResFinder</a> - Antimicrobial resistance genes</li>
+                <li><a href="https://cge.food.dtu.dk/services/SpeciesFinder/" target="_blank">SpeciesFinder</a> - Bacterial species identification</li>
+            </ul>
+
+            <h3>Antibiotic Resistance Analysis</h3>
+            <p><strong>Using Abricate:</strong></p>
+            <ol>
+                <li>Input: <span class="inline-code">contigs.fasta</span></li>
+                <li>Select database: ARG-ANNOT, CARD, NCBI, Resfinder, or PlasmidFinder</li>
+            </ol>
+        </div>
+
+        <!-- NEW: Galaxy Workflow Section -->
+        <div class="section">
+            <h2><span class="emoji">🌌</span> 11. Galaxy Workflow</h2>
+            
+            <h3>1. Quality Control</h3>
+            <ol>
+                <li>Upload R1/R2 FASTQ files</li>
+                <li>Run FastQC on raw reads</li>
+            </ol>
+
+            <h3>2. Read Trimming</h3>
+            <p><strong>Option A: fastp</strong></p>
+            <ul>
+                <li>Select paired-end mode</li>
+                <li>Enable adapter auto-detection</li>
+                <li>Enable overrepresented analysis</li>
+            </ul>
+
+            <p><strong>Option B: Trimmomatic</strong></p>
+            <ul>
+                <li>Select paired-end mode</li>
+                <li>Set trimming parameters</li>
+            </ul>
+
+            <h3>3. Assembly (SPAdes)</h3>
+            <ul>
+                <li>Operation mode: Assembly and error correction</li>
+                <li>K-mer detection: Auto</li>
+                <li>Phred quality offset: Auto</li>
+            </ul>
+
+            <h3>4. Quality Assessment</h3>
+            <ul>
+                <li>QUAST: Upload contigs.fasta</li>
+                <li>BUSCO: Check genome completeness</li>
+            </ul>
+
+            <h3>5. Annotation (Prokka)</h3>
+            <ul>
+                <li>Input: contigs.fasta</li>
+                <li>Select kingdom (Bacteria/Virus)</li>
+            </ul>
+        </div>
+
         
         <!-- Final Notes Section -->
         <div class="section">
