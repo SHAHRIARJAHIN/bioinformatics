@@ -108,31 +108,31 @@ conda activate igv_env
 conda install -c bioconda igv -y
 conda deactivate
 
-# NEW: SPAdes (Genome Assembly)
+# SPAdes (Genome Assembly)
 conda create -n spades_env python=3.8 -y
 conda activate spades_env
 conda install -c bioconda spades -y
 conda deactivate
 
-# NEW: QUAST (Assembly Quality Assessment)
+# QUAST (Assembly Quality Assessment)
 conda create -n quast_env -y
 conda activate quast_env
 conda install -c bioconda quast -y
 conda deactivate
 
-# NEW: Prokka (Genome Annotation)
+# Prokka (Genome Annotation)
 conda create -n prokka_env -y
 conda activate prokka_env
 conda install -c bioconda prokka -y
 conda deactivate
 
-# NEW: Artemis (Genome Visualization)
+# Artemis (Genome Visualization)
 conda create -n artemis_env -y
 conda activate artemis_env
 conda install -c bioconda artemis -y
 conda deactivate
 
-# NEW: Abricate (Antibiotic Resistance)
+# Abricate (Antibiotic Resistance)
 conda create -n abricate_env -y
 conda activate abricate_env
 conda install -c bioconda abricate -y
@@ -155,11 +155,11 @@ echo "  - freebayes_env    # FreeBayes"
 echo "  - bcftools_env     # BCFTools"
 echo "  - snpeff_env       # SnpEff"
 echo "  - igv_env          # IGV"
-echo "  - spades_env       # SPAdes (NEW)"
-echo "  - quast_env        # QUAST (NEW)"
-echo "  - prokka_env       # Prokka (NEW)"
-echo "  - artemis_env      # Artemis (NEW)"
-echo "  - abricate_env     # Abricate (NEW)"
+echo "  - spades_env       # SPAdes "
+echo "  - quast_env        # QUAST "
+echo "  - prokka_env       # Prokka "
+echo "  - artemis_env      # Artemis "
+echo "  - abricate_env     # Abricate "
 echo ""
 echo "Note: For tools like ResFinder and SpeciesFinder, please visit:"
 echo "  - https://www.genomicepidemiology.org/"
